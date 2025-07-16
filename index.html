@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nalikule Business Corner</title>
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --secondary: #2196F3;
+            --danger: #f44336;
+            --success: #4CAF50;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gray: #ddd;
+            --bg: white;
+            --text: #333;
+            --card-bg: white;
+        }
+        .dark-mode {
+            --primary: #4CAF50;
+            --secondary: #64B5F6;
+            --danger: #E57373;
+            --success: #81C784;
+            --light: #424242;
+            --dark: #f5f5f5;
+            --gray: #616161;
+            --bg: #121212;
+            --text: #e0e0e0;
+            --card-bg: #1e1e1e;
+        }
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        h1 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border: 1px solid var(--gray);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: var(--card-bg);
+            color: var(--text);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        button {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #1e5e20;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #0d7dd8;
+        }
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .product-card {
+            border: 1px solid var(--gray);
+            border-radius: 10px;
+            padding: 20px;
+            background: var(--card-bg);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .product-card h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        .product-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        .product-seller {
+            color: var(--text);
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        .product-date {
+            color: var(--text);
+            opacity: 0.6;
+            font-size: 12px;
+            margin-top: auto;
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .product-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: var(--gray);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            opacity: 0.5;
+        }
+        .hidden {
+            display: none;
+        }
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .alert-error {
+            background: #ffebee;
+            color: var(--danger);
+        }
+        .alert-success {
+            background: #e8f5e9;
+            color: var(--primary);
+        }
+        .alert-info {
+            background: #e3f2fd;
+            color: var(--secondary);
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--gray);
+        }
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            color: var(--text);
+        }
+        .tab.active {
+            border-bottom-color: var(--primary);
+            font-weight: 600;
+        }
+        .search-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .search-container input {
+            flex: 1;
+        }
+        .category-filter {
+            margin-bottom: 20px;
+        }
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .product-actions button {
+            flex: 1;
+        }
+        .dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text);
+        }
+        .chat-container {
+            margin-top: 20px;
+            border-top: 1px solid var(--gray);
+            padding-top: 20px;
+        }
+        .chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: var(--card-bg);
+        }
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input input {
+            flex: 1;
+        }
+        .image-upload-container {
+            margin-bottom: 20px;
+        }
+        .image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 10px;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🛍️ Nalikule Business Corner</h1>
+        <p>Campus Marketplace for Students</p>
+        <button class="dark-mode-toggle" id="dark-mode-toggle">🌓</button>
+    </header>
+
+    <div class="card" id="auth-container">
+        <h2>Student Access</h2>
+        <div id="alert-message" class="alert hidden"></div>
+        
+        <div class="form-group">
+            <label for="username">Your Name</label>
+            <input type="text" id="username" placeholder="Enter your name">
+        </div>
+        
+        <div class="form-group">
+            <label for="user-phone">WhatsApp Number (optional)</label>
+            <input type="tel" id="user-phone" placeholder="991234567">
+            <small>Include country code (265 for Malawi) but no + or 0</small>
+        </div>
+        
+        <button id="login-btn" class="btn-primary">Enter Marketplace</button>
+    </div>
+
+    <div class="card hidden" id="app-container">
+        <h2>Welcome, <span id="user-display"></span>!</h2>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="browse">Browse</div>
+            <div class="tab" data-tab="sell">Sell Item</div>
+            <div class="tab" data-tab="my-items">My Items</div>
+            <div class="tab" data-tab="chat">Chat</div>
+        </div>
+        
+        <div id="browse-tab">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search products...">
+                <button id="search-btn" class="btn-secondary">Search</button>
+            </div>
+            
+            <div class="category-filter">
+                <label for="category-select">Filter by Category:</label>
+                <select id="category-select">
+                    <option value="all">All Categories</option>
+                    <option value="books">Books</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div id="products-container">
+                <div class="product-grid" id="products-grid"></div>
+            </div>
+        </div>
+        
+        <div id="sell-tab" class="hidden">
+            <h3>Sell an Item</h3>
+            <div class="form-group">
+                <label for="product-name">Product Name</label>
+                <input type="text" id="product-name" placeholder="e.g. Calculus Textbook">
+            </div>
+            
+            <div class="form-group">
+                <label for="product-price">Price (K)</label>
+                <input type="number" id="product-price" placeholder="Enter price">
+            </div>
+            
+            <div class="form-group">
+                <label for="product-category">Category</label>
+                <select id="product-category">
+                    <option value="books">Books</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="product-description">Description</label>
+                <textarea id="product-description" rows="3" placeholder="Describe your item..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="product-image">Product Image (optional)</label>
+                <input type="file" id="product-image" accept="image/*">
+                <img id="image-preview" class="image-preview" alt="Image preview">
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="enable-whatsapp" checked>
+                    Enable WhatsApp contact button
+                </label>
+            </div>
+            
+            <button id="add-product-btn" class="btn-primary">Post Item</button>
+        </div>
+        
+        <div id="my-items-tab" class="hidden">
+            <h3>My Listed Items</h3>
+            <div class="product-grid" id="my-products-grid"></div>
+        </div>
+        
+        <div id="chat-tab" class="hidden">
+            <h3>Messages</h3>
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <p>Select a product to chat with the seller</p>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Type your message...">
+                    <button id="send-btn" class="btn-secondary">Send</button>
+                </div>
+            </div>
+        </div>
+        
+        <button id="logout-btn" class="btn-secondary">Logout</button>
+    </div>
+
+    <script>
+        // ==============================================
+        // ENHANCED INDEXEDDB SETUP WITH IMAGE SUPPORT
+        // ==============================================
+        let db;
+        const DB_NAME = 'NalikuleDB_v3';
+        const DB_VERSION = 3;
+        
+        const initDB = () => {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                
+                request.onupgradeneeded = (event) => {
+                    const db = event.target.result;
+                    
+                    if (!db.objectStoreNames.contains('products')) {
+                        const store = db.createObjectStore('products', { 
+                            keyPath: 'id',
+                            autoIncrement: true 
+                        });
+                        store.createIndex('seller', 'seller', { unique: false });
+                        store.createIndex('category', 'category', { unique: false });
+                    }
+                    
+                    if (!db.objectStoreNames.contains('users')) {
+                        const userStore = db.createObjectStore('users', {
+                            keyPath: 'username'
+                        });
+                        userStore.createIndex('phone', 'phone', { unique: false });
+                    }
+                    
+                    if (!db.objectStoreNames.contains('images')) {
+                        db.createObjectStore('images', {
+                            keyPath: 'productId'
+                        });
+                    }
+                    
+                    if (!db.objectStoreNames.contains('chats')) {
+                        const chatStore = db.createObjectStore('chats', {
+                            keyPath: 'id',
+                            autoIncrement: true
+                        });
+                        chatStore.createIndex('productId', 'productId', { unique: false });
+                    }
+                };
+                
+                request.onsuccess = (event) => {
+                    db = event.target.result;
+                    resolve(db);
+                };
+                
+                request.onerror = (event) => {
+                    reject('Database error: ' + event.target.error);
+                };
+            });
+        };
+
+        // Enhanced Database Operations
+        const dbOperations = {
+            addUser(user) {
+                return new Promise((resolve, reject) => {
+                    const transaction = db.transaction(['users'], 'readwrite');
+                    const store = transaction.objectStore('users');
+                    
+                    const request = store.put({ 
+                        username: user.username,
+                        phone: user.phone,
+                        joinedAt: new Date().toISOString()
+                    });
+                    
+                    request.onsuccess = () => resolve();
+                    request.onerror = () => reject(request.error);
+                });
+            },
+            
+            addProduct(product) {
+                return new Promise((resolve, reject) => {
+                    const transaction = db.transaction(['products'], 'readwrite');
+                    const store = transaction.objectStore('products');
+                    
+                    const request = store.add({
+                        name: product.name,
+                        price: product.price,
+                        seller: product.seller,
+                        sellerPhone: product.sellerPhone,
+                        category: product.category,
+                        description: product.description,
+                        enableWhatsApp: product.enableWhatsApp,
+                        createdAt: new Date().toISOString(),
+                        status: 'available'
+                    });
+                    
+                    request.onsuccess = (e) => resolve(e.target.result); // Return product ID
+                    request.onerror = () => reject(request.error);
+                });
+            },
+            
+            addImage(productId, imageData) {
+                return new Promise((resolve, reject) => {
+                    if (!imageData) return resolve();
+                    
+                    const transaction = db.transaction(['images'], 'readwrite');
+                    const store = transaction.objectStore('images');
+                    
+                    const request = store.put({
+                        productId,
+                        image: imageData
+                    });
+                    
+                    request.onsuccess = () => resolve();
+                    request.onerror = () => reject(request.error);
+                });
+            },
+            
+            getProducts(filter = {}) {
+                return new Promise((resolve, reject) => {
+                    const transaction = db.transaction(['products'], 'readonly');
+                    const store = transaction.objectStore('products');
+                    let request;
+                    
+                    if (filter.category && filter.category !== 'all') {
+                        const index = store.index('category');
+                        request = index.getAll(filter.category);
+                    } else if (filter.search) {
+                        request = store.getAll();
+                    } else {
+                        request = store.getAll();
+                    }
+                    
+                    request.onsuccess = async () => {
+                        let products = request.result;
+                        
+                        if (filter.search) {
+                            const searchTerm = filter.search.toLowerCase();
+                            products = products.filter(p => 
+                                p.name.toLowerCase().includes(searchTerm) || 
+                                (p.description && p.description.toLowerCase().includes(searchTerm))
+                            );
+                        }
+                        
+                        if (filter.seller) {
+                            products = products.filter(p => p.seller === filter.seller);
+                        }
+                        
+                        // Sort by newest first
+                        products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                        
+                        // Get images for products
+                        const imageTransaction = db.transaction(['images'], 'readonly');
+                        const imageStore = imageTransaction.objectStore('images');
+                        
+                        for (const product of products) {
+                            const imgRequest = imageStore.get(product.id);
+                            await new Promise(res => {
+                                imgRequest.onsuccess = () => {
+                                    if (imgRequest.result) {
+                                        product.image = imgRequest.result.image;
+                                    }
+                                    res();
+                                };
+                            });
+                        }
+                        
+                        resolve(products);
+                    };
+                    
+                    request.onerror = () => reject(request.error);
+                });
+            },
+            
+            deleteProduct(productId) {
+                return new Promise((resolve, reject) => {
+                    const transaction = db.transaction(['products', 'images'], 'readwrite');
+                    const productStore = transaction.objectStore('products');
+                    const imageStore = transaction.objectStore('images');
+                    
+                    productStore.delete(productId);
+                    imageStore.delete(productId);
+                    
+                    transaction.oncomplete = () => resolve();
+                    transaction.onerror = () => reject(transaction.error);
+                });
+            },
+            
+            addChatMessage(message) {
+                return new Promise((resolve, reject) => {
+                    const transaction = db.transaction(['chats'], 'readwrite');
+                    const store = transaction.objectStore('chats');
+                    
+                    const request = store.add({
+                        productId: message.productId,
+                        sender: message.sender,
+                        text: message.text,
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    request.onsuccess = () => resolve();
+                    request.onerror = () => reject(request.error);
+                });
+            },
+            
+            getChatMessages(productId) {
+                return new Promise((resolve, reject) => {
+                    const transaction = db.transaction(['chats'], 'readonly');
+                    const store = transaction.objectStore('chats');
+                    const index = store.index('productId');
+                    const request = index.getAll(productId);
+                    
+                    request.onsuccess = () => {
+                        const messages = request.result;
+                        messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+                        resolve(messages);
+                    };
+                    
+                    request.onerror = () => reject(request.error);
+                });
+            },
+            
+            getUserByUsername(username) {
+                return new Promise((resolve, reject) => {
+                    const transaction = db.transaction(['users'], 'readonly');
+                    const store = transaction.objectStore('users');
+                    const request = store.get(username);
+                    
+                    request.onsuccess = () => resolve(request.result);
+                    request.onerror = () => reject(request.error);
+                });
+            }
+        };
+
+        // ==============================================
+        // ENHANCED APPLICATION WITH ALL FEATURES
+        // ==============================================
+        let currentUser = null;
+        let currentProductChat = null;
+        const elements = {
+            // Auth
+            authContainer: document.getElementById('auth-container'),
+            appContainer: document.getElementById('app-container'),
+            usernameInput: document.getElementById('username'),
+            userPhoneInput: document.getElementById('user-phone'),
+            loginBtn: document.getElementById('login-btn'),
+            logoutBtn: document.getElementById('logout-btn'),
+            userDisplay: document.getElementById('user-display'),
+            alertMessage: document.getElementById('alert-message'),
+            
+            // Tabs
+            tabs: document.querySelectorAll('.tab'),
+            browseTab: document.getElementById('browse-tab'),
+            sellTab: document.getElementById('sell-tab'),
+            myItemsTab: document.getElementById('my-items-tab'),
+            chatTab: document.getElementById('chat-tab'),
+            
+            // Browse
+            searchInput: document.getElementById('search-input'),
+            searchBtn: document.getElementById('search-btn'),
+            categorySelect: document.getElementById('category-select'),
+            productsGrid: document.getElementById('products-grid'),
+            
+            // Sell
+            productNameInput: document.getElementById('product-name'),
+            productPriceInput: document.getElementById('product-price'),
+            productCategorySelect: document.getElementById('product-category'),
+            productDescriptionInput: document.getElementById('product-description'),
+            productImageInput: document.getElementById('product-image'),
+            imagePreview: document.getElementById('image-preview'),
+            enableWhatsAppCheckbox: document.getElementById('enable-whatsapp'),
+            addProductBtn: document.getElementById('add-product-btn'),
+            
+            // My Items
+            myProductsGrid: document.getElementById('my-products-grid'),
+            
+            // Chat
+            chatMessages: document.getElementById('chat-messages'),
+            chatInput: document.getElementById('chat-input'),
+            sendBtn: document.getElementById('send-btn'),
+            
+            // Dark Mode
+            darkModeToggle: document.getElementById('dark-mode-toggle')
+        };
+
+        // Helpers
+        function showAlert(message, type = 'error') {
+            elements.alertMessage.textContent = message;
+            elements.alertMessage.className = `alert alert-${type}`;
+            elements.alertMessage.classList.remove('hidden');
+            setTimeout(() => elements.alertMessage.classList.add('hidden'), 5000);
+        }
+
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+
+        function renderProductCard(product, showDelete = false) {
+            const whatsappLink = product.enableWhatsApp && product.sellerPhone 
+                ? `https://wa.me/265${product.sellerPhone}?text=Hi%20${encodeURIComponent(product.seller)}%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(product.name)}%20for%20sale%20on%20Nalikule%20Business%20Corner`
+                : null;
+            
+            return `
+                <div class="product-card" data-id="${product.id}">
+                    ${product.image 
+                        ? `<img src="${product.image}" class="product-image" alt="${product.name}">` 
+                        : `<div class="product-image-placeholder">No Image</div>`
+                    }
+                    <span class="product-category" style="
+                        background: #e0f7fa;
+                        padding: 3px 8px;
+                        border-radius: 12px;
+                        font-size: 12px;
+                        text-transform: capitalize;
+                        color: #00796B;
+                        display: inline-block;
+                        margin-bottom: 8px;
+                    ">${product.category}</span>
+                    <h3>${product.name}</h3>
+                    ${product.description ? `<p style="color: var(--text); opacity: 0.8; margin: 8px 0;">${product.description}</p>` : ''}
+                    <div class="product-price">K${product.price}</div>
+                    <div class="product-seller">Sold by: ${product.seller}</div>
+                    <div class="product-actions">
+                        ${whatsappLink 
+                            ? `<a href="${whatsappLink}" target="_blank" class="btn-whatsapp" style="text-decoration: none;">
+                                <span>Chat on WhatsApp</span>
+                            </a>` 
+                            : '<button class="btn-secondary" style="opacity: 0.7;">Contact Seller</button>'
+                        }
+                        <button class="btn-secondary chat-btn">Message</button>
+                    </div>
+                    <div class="product-date">Posted: ${formatDate(product.createdAt)}</div>
+                    ${showDelete ? `<button class="delete-btn btn-danger" style="margin-top: 10px;">Delete Item</button>` : ''}
+                </div>
+            `;
+        }
+
+        async function loadProducts(filter = {}) {
+            try {
+                const products = await dbOperations.getProducts(filter);
+                
+                if (filter.seller) {
+                    elements.myProductsGrid.innerHTML = products.length > 0 
+                        ? products.map(p => renderProductCard(p, true)).join('')
+                        : '<p>You haven\'t listed any items yet.</p>';
+                } else {
+                    elements.productsGrid.innerHTML = products.length > 0 
+                        ? products.map(renderProductCard).join('')
+                        : '<p>No products found. Be the first to sell!</p>';
+                }
+                
+                // Add delete event listeners
+                if (filter.seller) {
+                    document.querySelectorAll('.delete-btn').forEach(btn => {
+                        btn.addEventListener('click', async (e) => {
+                            const productId = Number(e.target.closest('.product-card').dataset.id);
+                            if (confirm('Are you sure you want to delete this item?')) {
+                                try {
+                                    await dbOperations.deleteProduct(productId);
+                                    loadProducts({ seller: currentUser.username });
+                                    showAlert('Product deleted', 'success');
+                                } catch (error) {
+                                    showAlert('Failed to delete product');
+                                }
+                            }
+                        });
+                    });
+                }
+                
+                // Add chat button listeners
+                document.querySelectorAll('.chat-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const productId = Number(e.target.closest('.product-card').dataset.id);
+                        const product = products.find(p => p.id === productId);
+                        if (product) {
+                            currentProductChat = product;
+                            document.querySelector('[data-tab="chat"]').click();
+                            loadChatMessages(productId);
+                        }
+                    });
+                });
+            } catch (error) {
+                showAlert('Failed to load products: ' + error);
+            }
+        }
+
+        async function loadChatMessages(productId) {
+            try {
+                const messages = await dbOperations.getChatMessages(productId);
+                elements.chatMessages.innerHTML = '';
+                
+                if (messages.length === 0) {
+                    elements.chatMessages.innerHTML = `<p>No messages yet. Start a conversation about ${currentProductChat.name}</p>`;
+                    return;
+                }
+                
+                messages.forEach(msg => {
+                    const isCurrentUser = msg.sender === currentUser.username;
+                    elements.chatMessages.innerHTML += `
+                        <div style="margin-bottom: 10px; text-align: ${isCurrentUser ? 'right' : 'left'}">
+                            <div style="
+                                background: ${isCurrentUser ? 'var(--secondary)' : 'var(--gray)'};
+                                color: ${isCurrentUser ? 'white' : 'var(--text)'};
+                                padding: 8px 12px;
+                                border-radius: 12px;
+                                display: inline-block;
+                                max-width: 80%;
+                            ">
+                                ${msg.text}
+                            </div>
+                            <div style="
+                                font-size: 12px;
+                                color: var(--text);
+                                opacity: 0.7;
+                                margin-top: 4px;
+                            ">
+                                ${isCurrentUser ? 'You' : msg.sender} • ${formatDate(msg.timestamp)}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                // Scroll to bottom
+                elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
+            } catch (error) {
+                showAlert('Failed to load messages: ' + error);
+            }
+        }
+
+        // Image Preview
+        elements.productImageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    elements.imagePreview.src = event.target.result;
+                    elements.imagePreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Dark Mode Toggle
+        elements.darkModeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+
+        // Tab Switching
+        elements.tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                elements.tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                elements.browseTab.classList.add('hidden');
+                elements.sellTab.classList.add('hidden');
+                elements.myItemsTab.classList.add('hidden');
+                elements.chatTab.classList.add('hidden');
+                
+                if (tab.dataset.tab === 'browse') {
+                    elements.browseTab.classList.remove('hidden');
+                    loadProducts();
+                } else if (tab.dataset.tab === 'sell') {
+                    elements.sellTab.classList.remove('hidden');
+                } else if (tab.dataset.tab === 'my-items') {
+                    elements.myItemsTab.classList.remove('hidden');
+                    loadProducts({ seller: currentUser.username });
+                } else if (tab.dataset.tab === 'chat') {
+                    elements.chatTab.classList.remove('hidden');
+                    if (currentProductChat) {
+                        elements.chatMessages.innerHTML = `<h4>Chat about ${currentProductChat.name}</h4>`;
+                        loadChatMessages(currentProductChat.id);
+                    }
+                }
+            });
+        });
+
+        // Event Listeners
+        elements.loginBtn.addEventListener('click', async () => {
+            const username = elements.usernameInput.value.trim();
+            if (!username) {
+                showAlert('Please enter your name');
+                return;
+            }
+            
+            try {
+                await dbOperations.addUser({
+                    username,
+                    phone: elements.userPhoneInput.value.trim()
+                });
+                
+                currentUser = {
+                    username,
+                    phone: elements.userPhoneInput.value.trim()
+                };
+                
+                elements.userDisplay.textContent = username;
+                elements.authContainer.classList.add('hidden');
+                elements.appContainer.classList.remove('hidden');
+                loadProducts();
+                showAlert(`Welcome ${username}!`, 'success');
+            } catch (error) {
+                showAlert('Login failed: ' + error);
+            }
+        });
+
+        elements.addProductBtn.addEventListener('click', async () => {
+            const name = elements.productNameInput.value.trim();
+            const price = parseFloat(elements.productPriceInput.value);
+            const category = elements.productCategorySelect.value;
+            const description = elements.productDescriptionInput.value.trim();
+            const enableWhatsApp = elements.enableWhatsAppCheckbox.checked;
+            const imageFile = elements.productImageInput.files[0];
+            
+            if (!name || isNaN(price)) {
+                showAlert('Please provide valid name and price');
+                return;
+            }
+            
+            try {
+                // First add the product to get an ID
+                const productId = await dbOperations.addProduct({
+                    name,
+                    price,
+                    seller: currentUser.username,
+                    sellerPhone: currentUser.phone,
+                    category,
+                    description,
+                    enableWhatsApp
+                });
+                
+                // Then add the image if there is one
+                if (imageFile) {
+                    const reader = new FileReader();
+                    reader.onload = async function(event) {
+                        await dbOperations.addImage(productId, event.target.result);
+                        completeProductAddition();
+                    };
+                    reader.readAsDataURL(imageFile);
+                } else {
+                    await completeProductAddition();
+                }
+                
+                async function completeProductAddition() {
+                    // Clear form
+                    elements.productNameInput.value = '';
+                    elements.productPriceInput.value = '';
+                    elements.productDescriptionInput.value = '';
+                    elements.productImageInput.value = '';
+                    elements.imagePreview.style.display = 'none';
+                    elements.imagePreview.src = '';
+                    
+                    // Switch to browse tab
+                    document.querySelector('[data-tab="browse"]').click();
+                    showAlert('Product added successfully!', 'success');
+                }
+            } catch (error) {
+                showAlert('Failed to add product: ' + error);
+            }
+        });
+
+        elements.searchBtn.addEventListener('click', () => {
+            const searchTerm = elements.searchInput.value.trim();
+            const category = elements.categorySelect.value;
+            loadProducts({ search: searchTerm, category });
+        });
+
+        elements.categorySelect.addEventListener('change', () => {
+            const searchTerm = elements.searchInput.value.trim();
+            const category = elements.categorySelect.value;
+            loadProducts({ search: searchTerm, category });
+        });
+
+        elements.sendBtn.addEventListener('click', async () => {
+            const message = elements.chatInput.value.trim();
+            if (!message || !currentProductChat) return;
+            
+            try {
+                await dbOperations.addChatMessage({
+                    productId: currentProductChat.id,
+                    sender: currentUser.username,
+                    text: message
+                });
+                
+                elements.chatInput.value = '';
+                loadChatMessages(currentProductChat.id);
+            } catch (error) {
+                showAlert('Failed to send message: ' + error);
+            }
+        });
+
+        // Allow pressing Enter to send message
+        elements.chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                elements.sendBtn.click();
+            }
+        });
+
+        elements.logoutBtn.addEventListener('click', () => {
+            currentUser = null;
+            currentProductChat = null;
+            elements.authContainer.classList.remove('hidden');
+            elements.appContainer.classList.add('hidden');
+            elements.usernameInput.value = '';
+            elements.userPhoneInput.value = '';
+        });
+
+        // Initialize
+        (async () => {
+            try {
+                await initDB();
+                console.log('Enhanced database initialized');
+            } catch (error) {
+                showAlert('Failed to initialize database: ' + error);
+            }
+        })();
+    </script>
+</body>
+</html>
